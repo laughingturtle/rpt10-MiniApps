@@ -3,16 +3,22 @@
   <head>
 
     <title>Mini App 2</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
   </head>
 
   <body>
     <h1> Send some json </h1>
-    <form>
+    <form id='send_json'>
         <textarea id="jsontext" name="jsontext" rows="5" cols="33"></textarea><br> <br>
         <input type="submit" value="Send My Stuff">
     </form>
 
-    <script src="client/app.js"></script>
+    <div id='jsonText'>
+
+    </div>
+
+    <script src="app.js"></script>
 
   </body>
 </html>
