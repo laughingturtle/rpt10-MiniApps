@@ -1,6 +1,6 @@
 // const React = require('react');
 // const ReactDOM = require('react-dom');
-// import axios from 'axios';
+// const axios = require('axios');
 
 class App extends React.Component {
   constructor(props){
@@ -62,16 +62,30 @@ class Step1 extends React.Component {
     }
   }
 
-  handleForm() {
+  handleForm(params) {
     console.log('I\'m handling it ok?!');
     console.log(this.state);
-    // shove data in db
-    //// deliver 2nd page
+
+
+    axios.post('http://127.0.0.1:3001/p1', {
+      username: this.state.name,
+      email: this.state.email,
+      password: this.state.password,
+      createdAt: Date.now
+    })
+    .then(function(response){
+      console.log('success in handleForm --> ', response);
+    })
+    .catch(function (error){
+      console.log('error in handleForm---> ', error);
+    });
+
     this.props.cl();
   }
 
   continue() {
-      this.handleForm(this.state.name,this.state.email,this.state.password);
+      this.handleForm();
+      //this.handleForm(this.state.name,this.state.email,this.state.password);
   }
 
   onChangeName(e) {
@@ -138,8 +152,22 @@ class Step2 extends React.Component {
   handleForm2() {
     console.log('I\'m handling step 2 now');
     console.log(this.state);
-    // shove data in db
-    //// deliver 3rd page
+
+    axios.post('http://127.0.0.1:3001/p2', {
+        line1: this.state.line1,
+        line2: this.state.line2,
+        city: this.state.city,
+        state: this.state.state,
+        zip: this.state.zip,
+        phone: this.state.phone
+    })
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+
     this.props.cl();
   }
 
@@ -238,10 +266,23 @@ class Step3 extends React.Component {
   handleForm3() {
     console.log('I\'m handling step 3 now');
     console.log(this.state);
-    // shove data in db
-    //// deliver 3rd page
+
+    axios.post('http://127.0.0.1:3001/p3', {
+        cc: this.state.cc,
+        exp: this.state.exp,
+        cvv: this.state.cvv,
+        billingZip: this.state.billingZip
+    })
+    .then(function(response){
+      console.log(response);
+    })
+    .catch(function (error){
+      console.log(error);
+    });
+
     this.props.cl();
   }
+
 
   continue3 () {
       this.handleForm3(this.state.cc,this.state.exp,this.state.cvv,this.state.billingZip);
