@@ -26,7 +26,7 @@ class App extends React.Component{
 
   playRound() {
     if(!this.state.win){
-      console.log('current row/col: ', this.state.currRow, ',', this.state.currCol);
+ //     console.log('current row/col: ', this.state.currRow, ',', this.state.currCol);
       this.isEmpty();
       // check how many in a row / col / left diagonal / right diagonal
      this.checkHorizontal();
@@ -122,11 +122,9 @@ class App extends React.Component{
     // YELLOWS
     for (let i = 0; i < this.state.board.length; i++){
       streak = 0;
-     // console.log('reset - end of line');
       for (let j = 0; j < this.state.board[i].length; j++){
         if(this.state.board[i][j] === 0){
           streak = streak +1;
-      //    console.log('streak: ', streak);
           if(streak === 4){
             this.setState({
               win: true
@@ -143,19 +141,10 @@ class App extends React.Component{
     let streak = 0;
     // REDS //////// -------------->>
     for(let i = 0; i < this.state.board[0].length; i++){
-    //  console.log(i);
-      //arrayColumn(board, i);
-    //  console.log('Checking column');
       var that = this;
       this.state.board.map(function(x, index){
-        // console.log('that: ', that);
-        // console.log('i', i);
-        // console.log('index', index);
-        // console.log('board', that.state.board[index][i]);
         if(that.state.board[index][i] === 1){
-      //    console.log('it\'s a red!!');
           streak = streak +1;
-      //    console.log('streak: ', streak);
           if(streak === 4){
             that.setState({
               win: true
@@ -163,13 +152,10 @@ class App extends React.Component{
           }
         }
         if(that.state.board[index][i] === 0){
-      //    console.log('it\'s yellow!!');
           streak = 0;
-     //     console.log('streak: ', streak);
         }
       });
      streak = 0;
-    // console.log('reset - end of column');
     }
 
     // YELLOWS //////// -------------->>
@@ -221,12 +207,12 @@ class App extends React.Component{
     var colIncrement = colStart[0];
     var limitIncrement = 0;
     var eachNumIncrement = 0;
-    console.log('** FIRST RUN **');
+   // console.log('** FIRST RUN **');
     var traverseDiagonals = (row, col, diagNum, limit) => {
-      console.log('** TRAVERSING FUNCTION **');
+    //  console.log('** TRAVERSING FUNCTION **');
      //console.log('this', this.state.board);
-      console.log('row/coll:', row, col);
-      console.log('limit', limit);
+    //  console.log('row/coll:', row, col);
+    //  console.log('limit', limit);
       // console.log('current value: ', this.state.board[row][coll]);
       // console.log('limit increment', limitIncrement);
       // console.log('len of arr', limitArr.length -1);
@@ -239,9 +225,9 @@ class App extends React.Component{
 
         if(this.state.board[row][col] === 1){
           rStreak++;
-          console.log('R streak: ', rStreak);
+     //     console.log('R streak: ', rStreak);
           yStreak = 0;
-          console.log('Y streak: ', yStreak);
+     //     console.log('Y streak: ', yStreak);
           if(rStreak === 4){
             that.setState({
               win: true
@@ -250,9 +236,9 @@ class App extends React.Component{
         }
         if(this.state.board[row][col] === 0){
           yStreak++;
-          console.log('Y streak: ', yStreak);
+      //    console.log('Y streak: ', yStreak);
           rStreak = 0;
-          console.log('R streak: ', rStreak);
+     //     console.log('R streak: ', rStreak);
           if(yStreak === 4){
             that.setState({
               win: true
@@ -262,13 +248,13 @@ class App extends React.Component{
       rowIncrement ++;
       colIncrement ++;
       diagNum ++;
-      console.log('diagNum', diagNum);
+    //  console.log('diagNum', diagNum);
       }
       round ++;
       limit = limit;
-      console.log('round', round);
+    //  console.log('round', round);
       if(row === 5 || col === 6 || limit === diagNum){
-        console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
+     //   console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
         arrStartIncrement++;
         rowIncrement = rowStart[arrStartIncrement];
         colIncrement = colStart[arrStartIncrement];
@@ -276,7 +262,7 @@ class App extends React.Component{
         diagNum = 0;
       }
       if(round === 30){
-        console.log('** ROUND LIMIT HIT - STOP **');
+    //    console.log('** ROUND LIMIT HIT - STOP **');
         return;
       }
       // console.log(':: next round coords ::');
@@ -307,7 +293,6 @@ class App extends React.Component{
     5,0   5,1   5,2   5,3   5,4   5,5   5,6
     */
 
-
    var round = 0;
    var rStreak = 0;
    var yStreak = 0;
@@ -319,12 +304,12 @@ class App extends React.Component{
    var colIncrement = colStart[0];
    var limitIncrement = 0;
    var eachNumIncrement = 0;
-   console.log('** FIRST RUN **');
+ //  console.log('** FIRST RUN **');
    var traverseDiagonals = (row, col, diagNum, limit) => {
-     console.log('** TRAVERSING FUNCTION **');
-    //console.log('this', this.state.board);
-     console.log('row/coll:', row, col);
-     console.log('limit', limit);
+    //  console.log('** TRAVERSING FUNCTION **');
+    // //console.log('this', this.state.board);
+    //  console.log('row/coll:', row, col);
+    //  console.log('limit', limit);
      // console.log('current value: ', this.state.board[row][coll]);
      // console.log('limit increment', limitIncrement);
      // console.log('len of arr', limitArr.length -1);
@@ -337,9 +322,9 @@ class App extends React.Component{
 
        if(this.state.board[row][col] === 1){
          rStreak++;
-         console.log('R streak: ', rStreak);
+       //  console.log('R streak: ', rStreak);
          yStreak = 0;
-         console.log('Y streak: ', yStreak);
+       //  console.log('Y streak: ', yStreak);
          if(rStreak === 4){
            that.setState({
              win: true
@@ -348,9 +333,9 @@ class App extends React.Component{
        }
        if(this.state.board[row][col] === 0){
          yStreak++;
-         console.log('Y streak: ', yStreak);
+      //   console.log('Y streak: ', yStreak);
          rStreak = 0;
-         console.log('R streak: ', rStreak);
+      //   console.log('R streak: ', rStreak);
          if(yStreak === 4){
            that.setState({
              win: true
@@ -360,13 +345,13 @@ class App extends React.Component{
      rowIncrement ++;
      colIncrement --;
      diagNum ++;
-     console.log('diagNum', diagNum);
+    // console.log('diagNum', diagNum);
      }
      round ++;
      limit = limit;
-     console.log('round', round);
+    // console.log('round', round);
      if(row === 5 || col === 0 || limit === diagNum){
-       console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
+     //  console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
        arrStartIncrement++;
        rowIncrement = rowStart[arrStartIncrement];
        colIncrement = colStart[arrStartIncrement];
@@ -374,7 +359,7 @@ class App extends React.Component{
        diagNum = 0;
      }
      if(round === 30){
-       console.log('** ROUND LIMIT HIT - STOP **');
+     //  console.log('** ROUND LIMIT HIT - STOP **');
        return;
      }
      // console.log(':: next round coords ::');
