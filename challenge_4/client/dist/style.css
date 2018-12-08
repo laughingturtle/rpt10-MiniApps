@@ -6,7 +6,7 @@
   background-size: 574px 492px;
 }
 #border{
-  border: 1px solid #469de4;
+  border: 1px solid #3a8cce;
 }
 .row{
   width:574px;
@@ -14,7 +14,8 @@
   border: none;
 }
 .sqr{
-border: 1px solid #469de4;
+ border: 1px solid #3a8cce;
+ /* border: 1px solid #469de4; */
  float: right;
  height: 80px;
  width: 80px;
@@ -29,6 +30,7 @@ border: 1px solid #469de4;
 .title{
   text-align: center;
   width: 582px;
+  /* color: #3a8cce; */
 }
 
 h1{
