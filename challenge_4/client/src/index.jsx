@@ -29,12 +29,12 @@ class App extends React.Component{
       console.log('current row/col: ', this.state.currRow, ',', this.state.currCol);
       this.isEmpty();
       // check how many in a row / col / left diagonal / right diagonal
-      this.checkHorizontal();
-      this.checkVertical();
-      this.checkLeftDiagonal();
-      //   this.checkRightDiagonal();
+     this.checkHorizontal();
+     this.checkVertical();
+     this.checkLeftDiagonal();
+     this.checkRightDiagonal();
       // change color
-        this.changeColor();
+     this.changeColor();
     }
   }
 
@@ -174,18 +174,10 @@ class App extends React.Component{
 
     // YELLOWS //////// -------------->>
     for(let i = 0; i < this.state.board[0].length; i++){
-      // console.log(i);
-      // console.log('Checking column');
       var that = this;
       this.state.board.map(function(x, index){
-        // console.log('that: ', that);
-        // console.log('i', i);
-        // console.log('index', index);
-        // console.log('board', that.state.board[index][i]);
         if(that.state.board[index][i] === 0){
-      //    console.log('it\'s a yellow!!');
           streak = streak +1;
-      //    console.log('streak: ', streak);
           if(streak === 4){
             that.setState({
               win: true
@@ -193,68 +185,206 @@ class App extends React.Component{
           }
         }
         if(that.state.board[index][i] === 1){
-       //   console.log('it\'s red!!');
           streak = 0;
-       //   console.log('streak: ', streak);
         }
       });
      streak = 0;
-   //  console.log('reset - end of column');
     }
-
   }
 
   checkLeftDiagonal() {
-    // console.log('checkLeftDiagonal running ---> ');
-    // let streak = 0;
-    // let offset = 0;
-    // // REDS
+    /*
+    2,0   1,0   0,0   0,1   0,2   0,3
+    3,1   2,1   1,1   1,2   1,3   1,4
+    4,2   3,2   2,2   2,3   2,4   2,5
+    5,3   4,3   3,3   3,4   3,5   3,6
+          5,4   4,4   4,5   4,6
+                5,5   5,6
+
+    0,0   0,1   0,2   0,3   0,4   0,5   0,6
+    1,0   1,1   1,2   1,3   1,4   1,5   1,6
+    2,0   2,1   2,2   2,3   2,4   2,5   2,6
+    3,0   3,1   3,2   3,3   3,4   3,5   3,6
+    4,0   4,1   4,2   4,3   4,4   4,5   4,6
+    5,0   5,1   5,2   5,3   5,4   5,5   5,6
+    */
 
 
+    var round = 0;
+    var rStreak = 0;
+    var yStreak = 0;
+    var arrStartIncrement = 0;
+    var limitArr = [4,5,6,6,5,4];
+    var rowStart = [2,1,0,0,0,0];
+    var colStart = [0,0,0,1,2,3];
+    var rowIncrement = rowStart[0];
+    var colIncrement = colStart[0];
+    var limitIncrement = 0;
+    var eachNumIncrement = 0;
+    console.log('** FIRST RUN **');
+    var traverseDiagonals = (row, col, diagNum, limit) => {
+      console.log('** TRAVERSING FUNCTION **');
+     //console.log('this', this.state.board);
+      console.log('row/coll:', row, col);
+      console.log('limit', limit);
+      // console.log('current value: ', this.state.board[row][coll]);
+      // console.log('limit increment', limitIncrement);
+      // console.log('len of arr', limitArr.length -1);
+      if(limitIncrement < limitArr.length-1){
+        var that = this;
+        if(this.state.board[row][col] === null){
+          yStreak = 0;
+          rStreak = 0;
+        }
 
-        /*
-           if row is 2 col 0 depth is 4
-           if row is 1 col 0 depth is 5
-           if row is 0 col 0 depth is 6
-           if row is 0 col 1 depth is 6
-           if row is 0 col 2 depth is 5
-           if row is 0 col 3 depth is 4
+        if(this.state.board[row][col] === 1){
+          rStreak++;
+          console.log('R streak: ', rStreak);
+          yStreak = 0;
+          console.log('Y streak: ', yStreak);
+          if(rStreak === 4){
+            that.setState({
+              win: true
+            }, () => that.windtlr());
+          }
+        }
+        if(this.state.board[row][col] === 0){
+          yStreak++;
+          console.log('Y streak: ', yStreak);
+          rStreak = 0;
+          console.log('R streak: ', rStreak);
+          if(yStreak === 4){
+            that.setState({
+              win: true
+            }, () => that.windtlr());
+          }
+        }
+      rowIncrement ++;
+      colIncrement ++;
+      diagNum ++;
+      console.log('diagNum', diagNum);
+      }
+      round ++;
+      limit = limit;
+      console.log('round', round);
+      if(row === 5 || col === 6 || limit === diagNum){
+        console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
+        arrStartIncrement++;
+        rowIncrement = rowStart[arrStartIncrement];
+        colIncrement = colStart[arrStartIncrement];
+        limit = limitArr[arrStartIncrement];
+        diagNum = 0;
+      }
+      if(round === 30){
+        console.log('** ROUND LIMIT HIT - STOP **');
+        return;
+      }
+      // console.log(':: next round coords ::');
+      // console.log('my row var ', rowStart[rowIncrement]);
+      // console.log('my col var ', colStart[colIncrement]);
+      // console.log('my limit var ', limitArr[limitIncrement]);
+      traverseDiagonals(rowIncrement, colIncrement, diagNum, limit);
+    }
 
-           if starting row > 0
-           depth = board.length -row;
-
-           if starting col > 0
-           depth = board[0].length - col;
-
-
-        */
-
-        // if(offset < 4){
-        //   console.log('row',i +offset++);
-        //   console.log('column',j);
-        // }
-      //   if(this.state.board[i][j] === 1){
-      //     streak = streak +1;
-      // //    console.log('streak: ', streak);
-      //     if(streak === 4){
-      //       this.setState({
-      //         win: true
-      //       }, () => this.windtlr());
-      //     }
-      //   }
-      //   if(this.state.board[i][j] === 0){
-      //     streak = 0;
-      //   }
-      //   if(i < 6){
-      //     i = i + 1;
-      //   }
-     // }
-    //}
+    traverseDiagonals(rowStart[0], colStart[0], eachNumIncrement, limitArr[0]);
   }
 
 
   checkRightDiagonal() {
+    /*
+    2,6   1,6   0,6   0,5   0,4   0,3
+    3,5   2,5   1,5   1,4   1,3   1,2
+    4,4   3,4   2,4   2,3   2,2   2,1
+    5,3   4,3   3,3   3,2   3,1   3,0
+          5,2   4,2   4,1   4,0
+                5,1   5,0
 
+    0,0   0,1   0,2   0,3   0,4   0,5   0,6
+    1,0   1,1   1,2   1,3   1,4   1,5   1,6
+    2,0   2,1   2,2   2,3   2,4   2,5   2,6
+    3,0   3,1   3,2   3,3   3,4   3,5   3,6
+    4,0   4,1   4,2   4,3   4,4   4,5   4,6
+    5,0   5,1   5,2   5,3   5,4   5,5   5,6
+    */
+
+
+   var round = 0;
+   var rStreak = 0;
+   var yStreak = 0;
+   var arrStartIncrement = 0;
+   var limitArr = [4,5,6,6,5,4];
+   var rowStart = [2,1,0,0,0,0];
+   var colStart = [6,6,6,5,4,3];
+   var rowIncrement = rowStart[0];
+   var colIncrement = colStart[0];
+   var limitIncrement = 0;
+   var eachNumIncrement = 0;
+   console.log('** FIRST RUN **');
+   var traverseDiagonals = (row, col, diagNum, limit) => {
+     console.log('** TRAVERSING FUNCTION **');
+    //console.log('this', this.state.board);
+     console.log('row/coll:', row, col);
+     console.log('limit', limit);
+     // console.log('current value: ', this.state.board[row][coll]);
+     // console.log('limit increment', limitIncrement);
+     // console.log('len of arr', limitArr.length -1);
+     if(limitIncrement < limitArr.length-1){
+       var that = this;
+       if(this.state.board[row][col] === null){
+         yStreak = 0;
+         rStreak = 0;
+       }
+
+       if(this.state.board[row][col] === 1){
+         rStreak++;
+         console.log('R streak: ', rStreak);
+         yStreak = 0;
+         console.log('Y streak: ', yStreak);
+         if(rStreak === 4){
+           that.setState({
+             win: true
+           }, () => that.windtrl());
+         }
+       }
+       if(this.state.board[row][col] === 0){
+         yStreak++;
+         console.log('Y streak: ', yStreak);
+         rStreak = 0;
+         console.log('R streak: ', rStreak);
+         if(yStreak === 4){
+           that.setState({
+             win: true
+           }, () => that.windtrl());
+         }
+       }
+     rowIncrement ++;
+     colIncrement --;
+     diagNum ++;
+     console.log('diagNum', diagNum);
+     }
+     round ++;
+     limit = limit;
+     console.log('round', round);
+     if(row === 5 || col === 0 || limit === diagNum){
+       console.log('** ROW / COL LIMITS HIT - RESTART COUNT **');
+       arrStartIncrement++;
+       rowIncrement = rowStart[arrStartIncrement];
+       colIncrement = colStart[arrStartIncrement];
+       limit = limitArr[arrStartIncrement];
+       diagNum = 0;
+     }
+     if(round === 30){
+       console.log('** ROUND LIMIT HIT - STOP **');
+       return;
+     }
+     // console.log(':: next round coords ::');
+     // console.log('my row var ', rowStart[rowIncrement]);
+     // console.log('my col var ', colStart[colIncrement]);
+     // console.log('my limit var ', limitArr[limitIncrement]);
+     traverseDiagonals(rowIncrement, colIncrement, diagNum, limit);
+   }
+
+   traverseDiagonals(rowStart[0], colStart[0], eachNumIncrement, limitArr[0]);
   }
 
 
