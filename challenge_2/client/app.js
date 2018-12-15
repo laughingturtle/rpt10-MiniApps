@@ -1,4 +1,3 @@
-
 $('form').on('submit', function(e){
   e.preventDefault();
 
@@ -12,12 +11,18 @@ $('form').on('submit', function(e){
 
   /* initiate ajax */
   $.ajax({
-    url: "http://127.0.0.1:3001/json",
+    url: "http://127.0.0.1:3000/json",
     type: 'POST',
     data: message,
     contentType: 'application/json',
     success: function(result){
+    console.log('result back on the client: ', result);
     $("#jsonText").html(result);
-  }});
+    },
+    fail: function(err){
+      console.log('err back on the client: ', err);
+      $("#jsonText").html('Damn this sucks, crickets');
+    }
+  });
 });
 

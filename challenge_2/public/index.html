@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <title>Mini App 2</title>
+
+    <!-- <link rel="stylesheet" type="css/text" href="style.css"> -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <style>
+    .oneup{
+        width: 400px;
+        float: left;
+        /* border: 1px solid #000; */
+      }
+    .twoup{
+      width: 400px;
+      float: right;
+      /* border: 1px solid #000; */
+    }
+
+    .container{
+      width: 810px;
+      display: inline-block;
+    }
+    .outerContainer{
+      text-align: center;
+    }
+      </style>
+
+  </head>
+
+  <body>
+    <div class="outerContainer">
+      <h1> json to csv </h1>
+      <div class="container">
+        <div class="oneup">
+            <h2> Enter json</h2>
+          <form id='send_json'>
+              <textarea id="jsontext" name="jsontext" rows="25" cols="50"></textarea><br> <br>
+              <input type="submit" value="Send My Stuff">
+          </form>
+        </div>
+        <div class="twoup">
+          <h2> csv</h2>
+            <div id='jsonText'>
+
+            </div>
+        </div>
+      </div>
+  </div>
+  <script src="app.js"></script>
+
+  </body>
+</html>
+
