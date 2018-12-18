@@ -1,9 +1,10 @@
 const express = require('express');
 const http = require('http');
 var bodyParser = require('body-parser');
+let converter = require('json-2-csv');
 const app = express();
 
-const port = 3000;
+const port = 3001;
 // var ip = '127.0.0.1';
 
 http.createServer(app).listen(port, function () {
@@ -21,11 +22,20 @@ app.use(bodyParser.urlencoded({ extended: false }));
 /* routes */
 app.post('/json', function (req, res) {
  // console.log('data on server:',  req.body);
-  var data = req.body;
-  //console.log('data', data);
-  var result = convertToCSV(data);
-  console.log('my result: ', result);
-  res.status(200).send(result);
+  var processData = req.body;
+  console.log('data', processData);
+  var data = converter.json2csv(processData, function (err, csv){
+    if(err){
+      console.log('error in processing', err);
+    } else {
+      console.log('result', csv);
+      res.status(200).send(csv);
+    }
+  }
+  );
+  // var result = convertToCSV(processData);
+  // console.log('my result: ', result);
+
 })
 
 app.get('/', function (req, res) {
@@ -36,14 +46,14 @@ function convertToCSV(data) {
   var stringify = JSON.stringify(data);
   console.log('** I\'m running ** ', JSON.parse(stringify));
 
-  var array = typeof data != 'object' ? JSON.parse(data) : data;
+  var arr = typeof data != 'object' ? JSON.parse(data) : data;
   var str = '';
 
-  for (var i = 0; i < array.length; i++) {
+  for (var i = 0; i < arr.length; i++) {
       var line = '';
-      for (var index in array[i]) {
+      for (var index in arr[i]) {
           if (line != '') line += ','
-          line += array[i][index];
+          line += arr[i][index];
       }
       str += line + '\r\n';
   }
