@@ -11,7 +11,7 @@ $('form').on('submit', function(e){
 
   /* initiate ajax */
   $.ajax({
-    url: "http://127.0.0.1:3000/json",
+    url: "http://127.0.0.1:3004/json",
     type: 'POST',
     data: message,
     contentType: 'application/json',
