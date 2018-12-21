@@ -11,7 +11,11 @@ $('form').on('submit', function(e){
 
   /* initiate ajax */
   $.ajax({
+<<<<<<< HEAD
     url: "http://127.0.0.1:3004/json",
+=======
+    url: "http://127.0.0.1:3001/json",
+>>>>>>> d93395ce8a6d476b245b4aef5859362e71dc95e0
     type: 'POST',
     data: message,
     contentType: 'application/json',

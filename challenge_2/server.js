@@ -4,6 +4,8 @@ var bodyParser = require('body-parser');
 const app = express();
 
 const port = 3004;
+
+
 // var ip = '127.0.0.1';
 
 http.createServer(app).listen(port, function () {
@@ -26,6 +28,7 @@ app.post('/json', function (req, res) {
   var result = convert(data);
   console.log('my result: ', result);
   res.status(200).send(result);
+
 })
 
 app.get('/', function (req, res) {
@@ -42,12 +45,11 @@ function convert(data) {
     if(key !== 'children'){
       str += key + ',';
     }
+
   }
 
   str = str.slice(0, -1);
-  str += '<br/>';
-
-  //console.log('str', str);
+  str += '\r\n';
 
   function JSONtoCSV(node){
     for(var key in node){
@@ -58,13 +60,9 @@ function convert(data) {
       }
     }
     str = str.slice(0, -1);
-    str += '<br/>';
+    str += '\r\n';
   //  console.log('my array: ', node.children);
   //  console.log('my array length: ', node.children.length);
-    //debugger;
-    // if(node.children.length === 0){
-    //   return;
-    // } 
     if(node.children.length > 0){
       console.log('yay, let\'s go around again!');
       for(var i =0; i < node.children.length; i++){
