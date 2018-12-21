@@ -48,8 +48,6 @@ function convert(data) {
   str += '<br/>';
 
   //console.log('str', str);
-  
-
 
   function JSONtoCSV(node){
     for(var key in node){
@@ -61,8 +59,8 @@ function convert(data) {
     }
     str = str.slice(0, -1);
     str += '<br/>';
-    console.log('my array: ', node.children);
-    console.log('my array length: ', node.children.length);
+  //  console.log('my array: ', node.children);
+  //  console.log('my array length: ', node.children.length);
     //debugger;
     // if(node.children.length === 0){
     //   return;
